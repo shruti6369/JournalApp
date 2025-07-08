@@ -15,7 +15,7 @@ public class  JournalEntryController{
 
     public boolean createEntry(@RequestBody JournalEntry journalEntry){
         journalEntries.put(journalEntry.getId(),journalEntry);
-        return true;
+        return false;
     }
     @GetMapping("getJournalEntry")
     public List<JournalEntry> getEntry(){
