@@ -13,8 +13,8 @@ public class  JournalEntryController{
 
     @PostMapping("journalEntry")
 
-    public boolean createEntry(@RequestBody JournalEntry myEntry){
-        journalEntries.put(myEntry.getId(),myEntry);
+    public boolean createEntry(@RequestBody JournalEntry journalEntry){
+        journalEntries.put(journalEntry.getId(),journalEntry);
         return true;
     }
     @GetMapping("getJournalEntry")
