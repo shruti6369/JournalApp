@@ -1,4 +1,2 @@
-net\engineeringdigest\journalapp\ApiCallingName.class
-net\engineeringdigest\journalapp\JournalEntry.class
-net\engineeringdigest\journalapp\JournalApplication.class
-net\engineeringdigest\journalapp\JournalEntryController.class
+net\engineeringdigest\journalapp\Repository\JournalEntryRepository.class
+net\engineeringdigest\journalapp\controller\HealthCheck.class
