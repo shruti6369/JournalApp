@@ -1,2 +1,6 @@
+net\engineeringdigest\journalapp\controller\JournalEntryControllerV2.class
+net\engineeringdigest\journalapp\JournalApplication.class
 net\engineeringdigest\journalapp\Repository\JournalEntryRepository.class
+net\engineeringdigest\journalapp\entity\JournalEntry.class
+net\engineeringdigest\journalapp\service\JournalEntryService.class
 net\engineeringdigest\journalapp\controller\HealthCheck.class
