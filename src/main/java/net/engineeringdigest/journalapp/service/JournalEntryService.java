@@ -2,10 +2,15 @@ package net.engineeringdigest.journalapp.service;
 
 import net.engineeringdigest.journalapp.Repository.JournalEntryRepository;
 import net.engineeringdigest.journalapp.entity.JournalEntry;
+
+import net.engineeringdigest.journalapp.entity.User;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +20,25 @@ public class JournalEntryService {
     @Autowired
     private JournalEntryRepository journalEntryRepository;
 
+    @Autowired
+    private UserService userService;
+
+
+    @Transactional
+    public void save(JournalEntry journalEntry, String userName){
+        try{
+            User user = userService.findByUserName(userName);
+            journalEntry.setDate(LocalDateTime.now());
+            JournalEntry saved = journalEntryRepository.save(journalEntry);
+            user.getJournalEntries().add(saved);
+            userService.save(user);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new RuntimeException("An error ocurres by saving the entry.",e);
+        }
+
+    }
 
     public void save(JournalEntry journalEntry){
         journalEntryRepository.save(journalEntry);
@@ -28,7 +52,11 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
 
-    public void deleteById(ObjectId id){
-         journalEntryRepository.deleteById(id);
+    public void deleteById(ObjectId id,String userName){
+        User user = userService.findByUserName(userName);
+        user.getJournalEntries().removeIf(x -> x.getId().equals(id));
+        userService.save(user);
+        journalEntryRepository.deleteById(id);
+
     }
 }
