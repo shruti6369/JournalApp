@@ -25,38 +25,52 @@ public class JournalEntryService {
 
 
     @Transactional
-    public void save(JournalEntry journalEntry, String userName){
-        try{
+    public void save(JournalEntry journalEntry, String userName) {
+        try {
             User user = userService.findByUserName(userName);
             journalEntry.setDate(LocalDateTime.now());
             JournalEntry saved = journalEntryRepository.save(journalEntry);
             user.getJournalEntries().add(saved);
-            userService.save(user);
+            userService.saveUser(user);
 
         } catch (Exception e) {
             System.out.println(e);
-            throw new RuntimeException("An error ocurres by saving the entry.",e);
+            throw new RuntimeException("An error ocurres by saving the entry.", e);
         }
 
     }
 
-    public void save(JournalEntry journalEntry){
+    public void save(JournalEntry journalEntry) {
         journalEntryRepository.save(journalEntry);
     }
 
-    public List<JournalEntry> getAll(){
+    public List<JournalEntry> getAll() {
         return journalEntryRepository.findAll();
     }
 
-    public Optional<JournalEntry> findById(ObjectId id){
+    public Optional<JournalEntry> findById(ObjectId id) {
         return journalEntryRepository.findById(id);
     }
 
-    public void deleteById(ObjectId id,String userName){
-        User user = userService.findByUserName(userName);
-        user.getJournalEntries().removeIf(x -> x.getId().equals(id));
-        userService.save(user);
-        journalEntryRepository.deleteById(id);
-
+    @Transactional
+    public void deleteById(ObjectId id, String userName) {
+        try {
+            User user = userService.findByUserName(userName);
+            boolean remove = user.getJournalEntries().removeIf(x -> x.getId().equals(id));
+            if (remove) {
+                userService.saveUser(user);
+                journalEntryRepository.deleteById(id);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new RuntimeException("An error ocurres by saving the entry.", e);
+        }
     }
 }
+
+
+
+
+
+
+
