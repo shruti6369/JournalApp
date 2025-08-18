@@ -14,6 +14,7 @@ import java.util.List;
 
 @Document(collection = "users")
 @Data
+@Builder
 public class User {
     @Id
     private ObjectId id;
