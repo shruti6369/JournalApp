@@ -1,0 +1,6 @@
+23:24:00.799 [http-nio-8081-exec-2] INFO  o.a.c.c.C.[.[localhost].[/journal] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+23:24:00.803 [http-nio-8081-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+23:24:00.806 [http-nio-8081-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+23:24:01.631 [http-nio-8081-exec-2] ERROR n.e.journalapp.service.UserService - hhhhhhhhh
+23:24:01.632 [http-nio-8081-exec-2] INFO  n.e.journalapp.service.UserService - hhhhhh
+23:24:01.633 [http-nio-8081-exec-2] WARN  n.e.journalapp.service.UserService - hhhh

@@ -6,6 +6,8 @@ import net.engineeringdigest.journalapp.entity.JournalEntry;
 import net.engineeringdigest.journalapp.entity.User;
 
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +25,6 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
 
-
     @Transactional
     public void save(JournalEntry journalEntry, String userName) {
         try {
@@ -34,7 +35,6 @@ public class JournalEntryService {
             userService.saveUser(user);
 
         } catch (Exception e) {
-            System.out.println(e);
             throw new RuntimeException("An error ocurres by saving the entry.", e);
         }
 
@@ -53,7 +53,7 @@ public class JournalEntryService {
     }
 
     @Transactional
-    public boolean deleteById(ObjectId id, String userName) {
+    public boolean  deleteById(ObjectId id, String userName) {
         boolean removed = false;
         try {
             User user = userService.findByUserName(userName);

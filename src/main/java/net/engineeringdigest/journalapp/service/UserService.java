@@ -1,8 +1,11 @@
 package net.engineeringdigest.journalapp.service;
 
+import lombok.extern.slf4j.Slf4j;
 import net.engineeringdigest.journalapp.Repository.UserRepository;
 import net.engineeringdigest.journalapp.entity.User;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,12 +18,15 @@ import java.util.Optional;
 
 
 @Component
+@Slf4j
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+
 
 
     public boolean saveNewUser(User user){
@@ -30,6 +36,11 @@ public class UserService {
             userRepository.save(user);
             return true;
         } catch (Exception e) {
+            log.error("hhhhhhhhh");
+            log.info("hhhhhh");
+            log.warn("hhhh");
+            log.trace("hh");
+            log.debug("hhhh");
             return false;
         }
     }
