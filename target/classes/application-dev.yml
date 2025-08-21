@@ -6,3 +6,12 @@ spring:
       auto-index-creation: true
 
 
+server:
+  port: 8081
+  servlet:
+    context-path: /journal
+
+weather:
+  api:
+    key: 3f4fc69b862760fa9e100d795b1b4b89
+
