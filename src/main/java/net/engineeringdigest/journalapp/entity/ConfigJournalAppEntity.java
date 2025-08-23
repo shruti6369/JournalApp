@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Document(collection = "config-journal-app")
+@Document(collection = "config_journal_app")
 @Data
 @NoArgsConstructor
 public class ConfigJournalAppEntity {

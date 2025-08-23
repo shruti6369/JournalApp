@@ -13,6 +13,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class AppCache {
 
+    public enum keys{
+
+        WEATHER-API;
+
+    }
+
     public static final Map<String, String> APP_CACHE = new ConcurrentHashMap<>();
 
     @Autowired
