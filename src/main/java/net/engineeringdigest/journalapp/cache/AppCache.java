@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,24 +15,21 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AppCache {
 
     public enum keys{
-
-        WEATHER-API;
+        WEATHER_API;
 
     }
 
-    public static final Map<String, String> APP_CACHE = new ConcurrentHashMap<>();
+    public  Map<String, String> appCache;
 
     @Autowired
     private ConfigJournalAppRepository configJournalAppRepository;
 
     @PostConstruct
     public void init() {
-        System.out.println("Loading configuration into APP_CACHE...");
+        appCache = new HashMap<>();
         List<ConfigJournalAppEntity> all = configJournalAppRepository.findAll();
-        for (ConfigJournalAppEntity e : all) {
-            APP_CACHE.put(e.getKey(), e.getValue());
-            System.out.println("Loaded: " + e.getKey() + " = " + e.getValue());
+        for(ConfigJournalAppEntity configJournalAppEntity : all){
+            appCache.put(configJournalAppEntity.getKey(), configJournalAppEntity.getValue());
         }
-        System.out.println("Final APP_CACHE: " + APP_CACHE);
     }
 }
